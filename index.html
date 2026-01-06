@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogSpace - Share Your Thoughts</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="#" class="active">BlogSpace</a></h1>
+            </div>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#" id="discover-link">Discover</a></li>
+                    <li><a href="#" id="about-link">About</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons" id="auth-section">
+                <button id="login-btn" class="btn btn-outline">Log In</button>
+                <button id="signup-btn" class="btn btn-primary">Sign Up</button>
+            </div>
+            <div class="user-profile" id="user-profile" style="display: none;">
+                <div class="user-avatar">
+                    <img src="assets/default-avatar.png" alt="User Avatar" id="user-avatar">
+                </div>
+                <div class="user-menu dropdown">
+                    <button class="dropdown-toggle" id="user-dropdown">
+                        <span id="username-display">Username</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" id="my-posts-link">My Posts</a>
+                        <a href="#" id="create-post-link">Create Post</a>
+                        <a href="#" id="profile-link">Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" id="logout-link">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-toggle">
+                <button id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Login Modal -->
+        <div class="modal" id="login-modal">
+            <div class="modal-content">
+                <span class="close" id="close-login">&times;</span>
+                <h2>Log In</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                    </div>
+                    <p class="text-center">Don't have an account? <a href="#" id="switch-to-signup">Sign Up</a></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Signup Modal -->
+        <div class="modal" id="signup-modal">
+            <div class="modal-content">
+                <span class="close" id="close-signup">&times;</span>
+                <h2>Sign Up</h2>
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-username">Username</label>
+                        <input type="text" id="signup-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm Password</label>
+                        <input type="password" id="signup-confirm-password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                    </div>
+                    <p class="text-center">Already have an account? <a href="#" id="switch-to-login">Log In</a></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Create Post Modal -->
+        <div class="modal" id="create-post-modal">
+            <div class="modal-content wide-modal">
+                <span class="close" id="close-create-post">&times;</span>
+                <h2>Create New Post</h2>
+                <form id="create-post-form">
+                    <div class="form-group">
+                        <label for="post-title">Title</label>
+                        <input type="text" id="post-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-category">Category</label>
+                        <select id="post-category" required>
+                            <option value="">Select Category</option>
+                            <option value="technology">Technology</option>
+                            <option value="travel">Travel</option>
+                            <option value="food">Food</option>
+                            <option value="lifestyle">Lifestyle</option>
+                            <option value="health">Health</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-content">Content</label>
+                        <textarea id="post-content" rows="10" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-image">Cover Image URL (optional)</label>
+                        <input type="url" id="post-image">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Publish Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Home Content (Featured Posts and Recent Posts) -->
+        <section class="hero" id="home-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Share Your Stories, Ideas, and Insights</h1>
+                    <p>Join our community of writers and readers passionate about unique perspectives</p>
+                    <button id="hero-get-started" class="btn btn-primary btn-large">Get Started</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-posts" id="featured-posts">
+            <div class="container">
+                <h2 class="section-title">Featured Posts</h2>
+                <div class="posts-grid" id="featured-posts-grid">
+                    <!-- Featured posts will be inserted here by JavaScript -->
+                    <div class="featured-post-placeholder">
+                        <p>Loading featured posts...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recent-posts" id="recent-posts">
+            <div class="container">
+                <h2 class="section-title">Recent Posts</h2>
+                <div class="posts-list" id="recent-posts-list">
+                    <!-- Recent posts will be inserted here by JavaScript -->
+                    <div class="post-placeholder">
+                        <p>Loading recent posts...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Posts Section -->
+        <section class="my-posts" id="my-posts-section" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">My Posts</h2>
+                <div class="posts-list" id="my-posts-list">
+                    <!-- User's posts will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Post Detail Section -->
+        <section class="post-detail" id="post-detail-section" style="display: none;">
+            <div class="container">
+                <div class="post-navigation">
+                    <button id="back-to-posts" class="btn btn-outline">
+                        <i class="fas fa-arrow-left"></i> Back to Posts
+                    </button>
+                </div>
+                <article id="post-detail-content">
+                    <!-- Post details will be inserted here by JavaScript -->
+                </article>
+                <div class="post-comments">
+                    <h3>Comments</h3>
+                    <div class="comment-form" id="comment-form-container">
+                        <!-- Comment form will be inserted here if user is logged in -->
+                    </div>
+                    <div class="comments-list" id="comments-list">
+                        <!-- Comments will be inserted here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discover Section -->
+        <section class="discover" id="discover-section" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">Discover Great Content</h2>
+                
+                <div class="discover-filters">
+                    <div class="filter-group">
+                        <label for="category-filter">Filter by Category:</label>
+                        <select id="category-filter">
+                            <option value="">All Categories</option>
+                            <option value="technology">Technology</option>
+                            <option value="travel">Travel</option>
+                            <option value="food">Food</option>
+                            <option value="lifestyle">Lifestyle</option>
+                            <option value="health">Health</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="sort-by">Sort by:</label>
+                        <select id="sort-by">
+                            <option value="latest">Latest</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="comments">Most Commented</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-box">
+                        <input type="text" id="search-posts" placeholder="Search posts...">
+                        <button id="search-button" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="posts-grid" id="discover-posts-grid">
+                    <!-- Posts will be inserted here by JavaScript -->
+                    <div class="post-placeholder">
+                        <p>Loading posts...</p>
+                    </div>
+                </div>
+                
+                <div class="pagination" id="discover-pagination">
+                    <button id="prev-page" class="btn btn-outline">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <div id="page-numbers">
+                        <span class="current-page">1</span> of <span id="total-pages">5</span>
+                    </div>
+                    <button id="next-page" class="btn btn-outline">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- About Section -->
+        <section class="about" id="about-section" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">About BlogSpace</h2>
+                <div class="about-content">
+                    <p>BlogSpace is a platform dedicated to empowering writers and readers to connect, share ideas, and engage in meaningful conversations.</p>
+                    <p>Our mission is to create a space where diverse voices can be heard and where quality content can find its audience.</p>
+                    <h3>Features</h3>
+                    <ul>
+                        <li>Create and publish your own blog posts</li>
+                        <li>Discover content from writers around the world</li>
+                        <li>Engage with authors through comments</li>
+                        <li>Save your favorite posts</li>
+                        <li>Build your personal profile and following</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>BlogSpace</h3>
+                    <p>Share your thoughts with the world</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Discover</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe to our newsletter for the latest updates</p>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 BlogSpace. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+      <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>67cc50850ee8663aeac36466,67cc4f32e830343c34800d60</script>
+    <script src="js/auth.js"></script>
+    <script src="js/posts.js"></script>
+    <script src="js/app.js"></script>
+</body>67cc50850ee8663aeac36466,67cc4f32e830343c34800d60
+</html>
